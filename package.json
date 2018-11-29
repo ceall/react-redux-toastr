@@ -1,5 +1,5 @@
 {
   "name": "react-redux-toastr",
-  "version": "7.4.2a",
-  "description": "react-redux-toastr is a React toastr message implemented with Redux",
+  "version": "7.4.2b",
+  "description": "react-redux-toastr is a React toastr message implemented with Redux"
 }
