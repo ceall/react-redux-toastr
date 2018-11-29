@@ -39,6 +39,7 @@ export default class ToastrConfirm extends React.Component {
     this.disableCancel = disableCancel || confirmOptions.disableCancel;
     _bind('setTransition removeConfirm handleOnKeyUp handleOnKeyDown', this);
     this.isKeyDown = false;
+    this.id = Math.floor(Math.random() * 9999);
   }
 
   componentDidMount() {
@@ -49,6 +50,13 @@ export default class ToastrConfirm extends React.Component {
     if (this.props.confirm.show) {
       this.setTransition(true);
     }
+    if (!this.containsOkButton(this.props.options.buttons)) {
+      this.confirmElement.focus();
+    }
+    if (!this.disableCancel && !this.containsCancelButton(this.props.options.buttons)) {
+      this.confirmElement.focus();
+    }
+    alert(10);
   }
 
   handleOnKeyDown(e) {
@@ -171,12 +179,12 @@ export default class ToastrConfirm extends React.Component {
           {options.component && <options.component/>}
           <div className="rrt-buttons-holder">
             {!this.containsOkButton(options.buttons) &&
-              <Button className="rrt-ok-btn" onClick={() => this.handleConfirmClick()}>
+              <Button tabIndex="0" className="rrt-ok-btn" onClick={() => this.handleConfirmClick()}>
                 {this.okText}
               </Button>
             }
             {!this.disableCancel && !this.containsCancelButton(options.buttons) &&
-              <Button className="rrt-cancel-btn" onClick={this.handleCancelClick.bind(this)}>
+              <Button  tabIndex="0" className="rrt-cancel-btn" onClick={this.handleCancelClick.bind(this)}>
                 {this.cancelText}
               </Button>
             }
@@ -189,7 +197,7 @@ export default class ToastrConfirm extends React.Component {
               const text = this.getCustomButtonText(button);
               const className = this.getCustomButtonClassName(button);
 
-              return <Button className={className} onClick={handler} key={index}>{text}</Button>;
+              return <Button tabIndex="0" className={className} onClick={handler} key={index}>{text}</Button>;
             })}
           </div>
         </div>
