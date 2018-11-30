@@ -63,7 +63,6 @@ export class ReduxToastr extends React.Component {
     EE.on('clean/toastr', clean);
     EE.on('removeByType/toastr', removeByType);
     EE.on('remove/toastr', remove);
-      alert(123);
   }
 
   componentWillUnmount() {

@@ -33,6 +33,8 @@ export default class ToastrBox extends React.Component {
 
     this.transitionIn = transitionIn || this.props.transitionIn;
     this.transitionOut = transitionOut || this.props.transitionOut;
+    // an identifier to facilitate aria labelling for a11y for multiple instances of the component family in the DOM
+    this.id = Math.floor(Math.random() * 9999);
 
     this.state = {progressBar: null};
 
@@ -72,13 +74,16 @@ export default class ToastrBox extends React.Component {
     this._setTransition();
     onCSSTransitionEnd(this.toastrBoxElement, this._onAnimationComplete);
     this.props.addToMemory(item.id);
-    alert(11);
+    //
+    this.closeButton.focus();
   }
 
   componentWillUnmount() {
     if (this.intervalId) {
       clearTimeout(this.intervalId);
     }
+    // when toast unloads the toast close button automatically focuses on the next toast control (if any)
+    document.getElementsByClassName('toastr-control')[0].focus();
   }
 
   handlePressEnterOrSpaceKeyToastr = (e) => {
@@ -189,8 +194,10 @@ export default class ToastrBox extends React.Component {
       <button
         tabIndex="0"
         type="button"
-        className="close-toastr"
+        className="close-toastr toastr-control"
+        aria-label="toast"
         onClick={this.handleClickCloseButton}
+        ref={ref => this.closeButton = ref}
       >
         &#x2715;
       </button>
@@ -213,9 +220,9 @@ export default class ToastrBox extends React.Component {
           </div>
         </div>
         {options.status && type === 'light' && <div className={classnames('toastr-status', options.status)}/>}
-        <div className="rrt-middle-container">
-          {title && <div className="rrt-title">{title}</div>}
-          {message && <div className="rrt-text">{message}</div>}
+        <div className="rrt-middle-container" role="alertdialog" aria-labelledby={`dialogTitle-${this.id}`} aria-describedby={`dialogDesc-${this.id}`}>
+          {title && <div id={`dialogTitle-${this.id}`} className="rrt-title">{title}</div>}
+          {message && <div id={`dialogDesc-${this.id}`} className="rrt-text">{message}</div>}
           {options.component && this.renderSubComponent()}
         </div>
 
