@@ -39,8 +39,8 @@ export default class ToastrConfirm extends React.Component {
     this.disableCancel = disableCancel || confirmOptions.disableCancel;
     _bind('setTransition removeConfirm handleOnKeyUp handleOnKeyDown', this);
     this.isKeyDown = false;
-    //an identifier to facilitate aria labelling for a11y for multiple instances of the component family in the DOM
-    this.id = Math.floor(Math.random() * 9999);  
+    // an identifier to facilitate aria labelling for a11y for multiple instances of the component family in the DOM
+    this.id = Math.floor(Math.random() * 9999);
 
   }
 
@@ -58,12 +58,12 @@ export default class ToastrConfirm extends React.Component {
     if (!this.disableCancel && !this.containsCancelButton(this.props.options.buttons)) {
       this.confirmElement.focus();
     }
-   //when toast loads the toast close button automatically focuses on the toast control
+   // when toast loads the toast close button automatically focuses on the toast control
     this.closeButton.focus();
   }
 
   componentWillUnmount() {
-    //when toast unloads the toast close button automatically focuses on the next toast control (if any)
+    // when toast unloads the toast close button automatically focuses on the next toast control (if any)
     document.getElementsByClassName('toastr-control')[0].focus();
   }
 

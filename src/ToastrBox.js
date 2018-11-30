@@ -33,9 +33,9 @@ export default class ToastrBox extends React.Component {
 
     this.transitionIn = transitionIn || this.props.transitionIn;
     this.transitionOut = transitionOut || this.props.transitionOut;
-    //an identifier to facilitate aria labelling for a11y
+    // an identifier to facilitate aria labelling for a11y
     this.id = Math.floor(Math.random() * 9999);
-  
+
     this.state = {progressBar: null};
 
     _bind(
@@ -74,7 +74,7 @@ export default class ToastrBox extends React.Component {
     this._setTransition();
     onCSSTransitionEnd(this.toastrBoxElement, this._onAnimationComplete);
     this.props.addToMemory(item.id);
-    //an identifier to facilitate aria labelling for a11y for multiple instances of the component family in the DOM
+    // an identifier to facilitate aria labelling for a11y for multiple instances of the component family in the DOM
     this.closeButton.focus();
   }
 
@@ -82,7 +82,7 @@ export default class ToastrBox extends React.Component {
     if (this.intervalId) {
       clearTimeout(this.intervalId);
     }
-    //when toast unloads the toast close button automatically focuses on the next toast control (if any)
+    // when toast unloads the toast close button automatically focuses on the next toast control (if any)
     document.getElementsByClassName('toastr-control')[0].focus();
   }
 
