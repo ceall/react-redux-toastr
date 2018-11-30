@@ -52,13 +52,7 @@ export default class ToastrConfirm extends React.Component {
     if (this.props.confirm.show) {
       this.setTransition(true);
     }
-    if (!this.containsOkButton(this.props.options.buttons)) {
-      this.confirmElement.focus();
-    }
-    if (!this.disableCancel && !this.containsCancelButton(this.props.options.buttons)) {
-      this.confirmElement.focus();
-    }
-   // when toast loads the toast close button automatically focuses on the toast control
+    // when toast loads the toast close button automatically focuses on the toast control
     this.closeButton.focus();
   }
 
